@@ -24,6 +24,10 @@ storage = firebase.storage()
 app = Flask(__name__)
 CORS(app)
 
+dtc_model5 = joblib.load("model5.pkl")
+print('Models loaded')
+model5_columns = joblib.load("model5_columns.pkl")
+print('Model columns loaded')
 
 @app.route('/')
 def index():
@@ -67,12 +71,4 @@ def batch_predict():
 
 
 if __name__ == '__main__':
-    try:
-        port = int(sys.argv[1])
-    except:
-        port = 12345
-    dtc_model5 = joblib.load("model5.pkl")
-    print('Models loaded')
-    model5_columns = joblib.load("model5_columns.pkl")
-    print('Model columns loaded')
-    app.run(port=port, debug=True)
+    app.run()
