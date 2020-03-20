@@ -63,6 +63,7 @@ def batch_predict():
 
             # Reading data from firebase file
             data = pd.read_excel(file_url)
+            data.replace(to_replace=['Pass', 'Fail', 'Yes', 'No'], value=[1, 0, 1, 0], inplace=True)
 
             # Making predictions
             if selected_model == 'Model5':
@@ -83,6 +84,7 @@ def batch_predict():
 
             print("[+] Predictions Done")
             pred = ['Pass' if x == 1 else 'Fail' for x in prediction]
+            data = pd.read_excel(file_url)
             data['Predictions'] = pred
 
             # Downloading result file as temp.xlsx and writing predictions in it
@@ -107,4 +109,4 @@ def batch_predict():
 
 
 if __name__ == '__main__':
-    app.run(port=12346, debug=True)
+    app.run()
